@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+{% block content%}
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Engro</title>
+ </head>
+ <body>
+ 
+
+
+<h1>Upload Pancard Image</h1>
+<!-- image upload start-->
+ <div class="container pt-7">
+<table width = "400">
+    <tr>
+    <td>
+
+<form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+     {{ form.as_p }}
+
+</td>
+<td><button type="submit" class="btn btn-primary">Upload</button> </td>
+</form>
+</tr>
+</table>
+
+  <h1>Result:</h1>
+  
+    {% if img_src %}
+        <img src="{{ img_src }}" width="600" height="400">
+    {% endif %}
+    <br>
+    {% if extracted_text %}
+        <pre><p> The extracted text from the image above is: 
+        <img src="/media/Face1.jpg" ></img> <br>
+        <h2><b> {{ extracted_text }} </b></h2></p></pre>
+        
+        
+        
+
+    {% else %}
+        The extracted text will be displayed here.
+    {% endif %}
+<!-- image upload end -->
+ </div> 
+</body>
+</html>
+
+{% endblock %}
