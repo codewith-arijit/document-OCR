@@ -140,8 +140,19 @@ def bank_id(request):
                 "Balance": b_t_bal
             }
             """
-            
-            return render(request, 'pcard/bank.html', {'form':form, 'bank_text': bank_text})
+            obj = [
+                bank_text[0],
+                bank_text[1],
+                bank_text[2],
+                bank_text[3],
+                bank_text[4],
+                bank_text[5],
+                bank_text[6],
+                bank_text[7],
+            ]
+            list_text_as_a_string = json.dumps(obj, indent=2)
+            return render(request, 'pcard/bank.html', {'form':form, 'bank_text': list_text_as_a_string})
+            #return render(request, 'pcard/bank.html', {'form':form, 'bank_text': bank_text})
 
     else:
         form = UploadFileForm()
