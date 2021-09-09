@@ -5,6 +5,7 @@ from PyPDF2 import PdfFileReader
 import re
 import pdftotext
 
+import fitz
 
 def bank_details(filename):
     #pdf_path3 = "text2.pdf"
@@ -69,8 +70,23 @@ def bank_details(filename):
     print(bank_text, "XXX")
     print("\n")
     
-
+    logo(filename)
     #print(f"Total Debit:%.2f \nTotal Credit:%.2f \nTotal Balance:%.2f" % (t_debit, t_credit, t_bal) )
     return bank_text
 
 #bank_details("text2.pdf")
+def logo(filename):
+
+    doc = fitz.open(filename)
+    for i in range(len(doc)):
+        for img in doc.getPageImageList(i):
+            xref = img[0]
+            pix = fitz.Pixmap(doc, xref)
+            if pix.n < 5:       # this is GRAY or RGB
+                pix.writePNG("/home/arijitsen/PAN-Card-OCR-master/media/p%s-%s.png" % (i, xref))
+            else:               # CMYK: convert to RGB first
+                pix1 = fitz.Pixmap(fitz.csRGB, pix)
+                pix1.writePNG("/home/arijitsen/PAN-Card-OCR-master/media/p%s-%s.png" % (i, xref))
+                pix1 = None
+            pix = None
+    

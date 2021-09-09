@@ -28,11 +28,23 @@
 </table>
 
   <h1>Result:</h1>
-  
+    
 
+    
+
+    {% if bank_text %} 
+         <img src="/media/p0-1.png" ></img> <br>
 
     <pre>{{ bank_text }}<pre> <br>
     
+
+        
+
+    {% else %}
+        The extracted text will be displayed here.
+    {% endif %}
+
+ 
     
 <!-- image upload end -->
  </div> 
