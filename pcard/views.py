@@ -10,11 +10,13 @@ from django.http import JsonResponse
 from django.conf import settings
 from .forms import UploadImageForm
 from .forms import ImageUploadForm
+from .forms import UploadFileForm
 # import our OCR function
 from .ocr import ocr
 import re
 from .adhar import adhar
 from .voterid import voterid
+from .bank import bank_details
 
 
 def first_view(request):
@@ -108,3 +110,40 @@ def ocr_core(request):
     else:
         form = ImageUploadForm()
     return render(request, 'pcard/pcard.html',{'form':form})
+
+
+
+def bank_id(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+ 
+            fileURL = settings.MEDIA_URL + form.instance.file.name
+            print(fileURL)
+            bank_text = bank_details(settings.MEDIA_ROOT_URL + fileURL)
+            #print(extracted_text)
+            print(bank_text, "HHH")
+            """
+            
+            b_no = bank_text[0]
+            b_name = bank_text[1]
+            b_code = bank_text[2]
+            b_op_bal = bank_text[3]
+            b_cl_bal = bank_text[4]
+            b_t_debit = bank_text[5]
+            b_t_credit = bank_text[6]
+            b_t_bal = bank_text[7]
+            obj = {
+                "Credit" : b_t_credit,
+                "Balance": b_t_bal
+            }
+            """
+            
+            return render(request, 'pcard/bank.html', {'form':form, 'bank_text': bank_text})
+
+    else:
+        form = UploadFileForm()
+    return render(request, 'pcard/bank.html',{'form':form})
+

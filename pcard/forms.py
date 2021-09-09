@@ -1,5 +1,6 @@
 from django import forms
 from .models import ImageUploadModel
+from .models import FileUploadModel
 
 
 class UploadImageForm(forms.Form):
@@ -12,3 +13,12 @@ class ImageUploadForm(forms.ModelForm):
   class Meta:
     model = ImageUploadModel
     fields = ('image', )
+
+
+
+
+
+class UploadFileForm(forms.ModelForm):
+  class Meta:
+    model = FileUploadModel
+    fields = ('file', )
