@@ -7,7 +7,7 @@ import pdftotext
 
 import fitz
 
-
+# SBI Bank Module
 def bank_details_sbi(filename):
     #pdf_path3 = "text2.pdf"
     dfs = tabula.read_pdf(filename, pages = "all")
@@ -52,8 +52,8 @@ def bank_details_sbi(filename):
     acc_no= "Account Number: "+ '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
     acc_code = "IFS Code: "+ '\n'.join([re.sub(r'IFS Code\s+:', '', line) for line in data.splitlines() if 'IFS Code' in line])
     
-    op_bal = "Opening Balance: " + str(bal[0])
-    cl_bal = "Closing Balance: " + str(bal[(len(bal)-1)])
+    op_bal = "Opening Balance: " + str(bal[df["Balance"].first_valid_index()])
+    cl_bal = "Closing Balance: " + str(bal[df["Balance"].last_valid_index()])
     t_debit = "Total Debit Summary: " + str(t_debit)
     t_credit = "Total Credit Summary: " + str(t_credit)
     t_bal = "Total Balance Summary: " + str(t_bal)
@@ -70,11 +70,16 @@ def bank_details_sbi(filename):
     bank_text.append(t_bal)
     print(bank_text, "XXX")
     print("\n")
-    
+    expense_report = []
+    expenses = df.iloc[:][['Description','Debit']].dropna()
+    bank_text.append(expenses)
+    incomes = df.iloc[:][['Description','Credit']].dropna()
+    bank_text.append(incomes)
     logo(filename)
     #print(f"Total Debit:%.2f \nTotal Credit:%.2f \nTotal Balance:%.2f" % (t_debit, t_credit, t_bal) )
     return bank_text
 
+# Allahabad bank module
 
 def bank_details_alla(filename):
     #pdf_path3 = "text2.pdf"
@@ -84,22 +89,19 @@ def bank_details_alla(filename):
 
     df = pd.read_csv("output.csv", thousands=",", error_bad_lines=False)
 
-    debit = df["DR"].dropna().reset_index(drop=True)
-    credit = df["CR"].dropna().reset_index(drop=True)
-    bal = df["Balance"].str.strip(" CR")
-    bal = df["Balance"].dropna().reset_index(drop=True)
-    
+    debit = df["DR"].dropna()
+    credit = df["CR"].dropna()
+    df["Balance"] = df["Balance"].str.strip(" CR")
+    bal = df["Balance"]
+    print(bal, "XXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     debit = pd.to_numeric(df["DR"], errors = 'coerce')
     credit = pd.to_numeric(df["CR"], errors = 'coerce')
     bal = pd.to_numeric(df["Balance"], errors = 'coerce')
     #debit = debit.astype(float)
-    #credit = credit.astype(float)
-    #bal = bal.astype(float)
-    
-    #print(df.dtypes, "XXXXXXXXXXX")
+    #credit = credit.astype(float)262603
     t_debit = debit.sum(skipna=True)
     t_credit = credit.sum(skipna=True)
-    t_bal = bal.sum(skipna=True)
+    t_bal = bal.sum()
 
     """coerce
         Whole List of stuffs
@@ -129,8 +131,8 @@ def bank_details_alla(filename):
     acc_no= "Account Number: ", '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
     acc_code = "IFS Code: ", '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC Code' in line])
     
-    op_bal = "Opening Balance: " + str(bal[0])
-    cl_bal = "Closing Balance: " + str(bal[(len(bal)-1)])
+    op_bal = "Opening Balance: " + str(bal[df["Balance"].first_valid_index()])
+    cl_bal = "Closing Balance: " + str(bal[df["Balance"].last_valid_index()])
     t_debit = "Total Debit Summary: " + str(t_debit)
     t_credit = "Total Credit Summary: " + str(t_credit)
     t_bal = "Total Balance Summary: " + str(t_bal)
@@ -145,6 +147,11 @@ def bank_details_alla(filename):
     bank_text.append(t_debit)
     bank_text.append(t_credit)
     bank_text.append(t_bal)
+
+    expenses = df.iloc[:][['Description','DR']].dropna()
+    bank_text.append(expenses)
+    incomes = df.iloc[:][['Description','CR']].dropna()
+    bank_text.append(incomes)
     #print(bank_text, "XXX")
     #print("\n")
     
@@ -152,7 +159,76 @@ def bank_details_alla(filename):
     #print(f"Total Debit:%.2f \nTotal Credit:%.2f \nTotal Balance:%.2f" % (t_debit, t_credit, t_bal) )
     return bank_text
 
+# YES Bank Module
 
+def bank_details_yes(filename):
+    #pdf_path3 = "text2.pdf"
+    dfs = tabula.read_pdf(filename, pages = "all")
+    tabula.convert_into(filename, "output.csv", output_format="csv", pages='1')
+    #pdf_path=r"text2.pdf"
+
+    df = pd.read_csv("output.csv", thousands=",",error_bad_lines=False)
+
+    debit = df["Debit"].dropna().reset_index(drop=True)
+    credit = df["Credit"].dropna().reset_index(drop=True)
+    bal = df["Balance"].dropna().reset_index(drop=True)
+
+    t_debit = debit.sum(skipna=True)
+    t_credit = credit.sum(skipna=True)
+    t_bal = bal.sum(skipna=True)
+    # print(t_bal, "XYYY")
+    """
+        Whole List of stuffs
+    """
+    bank_text = []
+
+
+# Load your PDF
+    with open(filename, "rb") as f:
+        pdf = pdftotext.PDF(f)
+
+    # If it's password-protected
+    #with str many pages?
+    #print(len(pdf))
+
+    # Iterate over all the pages
+    #for page in pdf:
+    #    print(page)
+
+    data = "\n\n".join(pdf)
+    # Read all the text into one string
+    #print(data)
+    acc_name= "Account Name: " + '\n'.join([re.sub(r'^[\d \t]+|[\d \t]+$', '', line) for line in data.splitlines() if 'MRS.' in line])
+    acc_no= "Account Number: "+ '\n'.join([re.sub(r'ACCOUNT No.\s+:', '', line) for line in data.splitlines() if 'ACCOUNT No.' in line])
+    acc_code = "IFS Code: "+ '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC' in line])
+    
+    op_bal = "Opening Balance: " + str(bal[0])
+    cl_bal = "Closing Balance: " + str(bal[(len(bal)-1)])
+    t_debit = "Total Debit Summary: " + str(t_debit)
+    t_credit = "Total Credit Summary: " + str(t_credit)
+    t_bal = "Total Balance Summary: " + str(t_bal)
+    #print(acc_name,"\n",acc_code,"\n",acc_no,"\n",op_bal,"\n",cl_bal)
+    bank_text.append(acc_no)
+    bank_text.append(acc_name)
+    bank_text.append(acc_code)
+    
+    bank_text.append(op_bal)
+    bank_text.append(cl_bal)
+
+    bank_text.append(t_debit)
+    bank_text.append(t_credit)
+    bank_text.append(t_bal)
+
+    expenses = df.iloc[:][['Description','Debit']].dropna()
+    bank_text.append(expenses)
+    incomes = df.iloc[:][['Description','Credit']].dropna()
+    bank_text.append(incomes)
+    #print(bank_text, "YeY")
+    #print("\n")
+    
+    #logo(filename)
+    #print(f"Total Debit:%.2f \nTotal Credit:%.2f \nTotal Balance:%.2f" % (t_debit, t_credit, t_bal) )
+    return bank_text
 
 #bank_details("text2.pdf")
 def logo(filename):
@@ -169,4 +245,5 @@ def logo(filename):
                 pix1.writePNG("/home/arijitsen/PAN-Card-OCR-master/media/p%s-%s.png" % (i, xref))
                 pix1 = None
             pix = None
-    
+
+

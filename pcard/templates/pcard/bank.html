@@ -5,6 +5,26 @@
  <head>
   <meta charset="UTF-8">
   <title>Engro</title>
+    <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
+<style>
+div#loading {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background: url('/media/loadingimage.gif') no-repeat;
+  display: none;
+  cursor: wait;
+  }
+</style>
  </head>
  <body>
  
@@ -12,6 +32,7 @@
 
 <h1>Upload Bank PDF</h1>
 <!-- image upload start-->
+
  <div class="container pt-7">
 <table width = "400">
     <tr>
@@ -22,7 +43,7 @@
      {{ form.as_p }}
 
 </td>
-<td><button type="submit" class="btn btn-primary">Upload</button> </td>
+<td><button type="submit" class="btn btn-primary" onclick="loading();">Upload</button> </td>
 </form>
 </tr>
 </table>
@@ -32,13 +53,31 @@
 
     
 
+
     {% if bank_text %} 
          <img src="/media/p0-1.png" ></img> <br>
 
-    <pre>{{ bank_text }}<pre> <br>
-    
+<hr>
+<h2>Account Summary</h2><br>
+<hr>    
+{{ bank_text.0}}<br>
+{{ bank_text.1}}<br>
+{{ bank_text.2}}<br>
+{{ bank_text.3}}<br>
+{{ bank_text.4}}<br>
+{{ bank_text.5}}<br>
+{{ bank_text.6}}<br>
+{{ bank_text.7}}<br>
+<hr>
+<center><h2>Your Expense Report</h2><br></center>
+<h3>Expenses: </h3>
+<hr>
+<pre>{{ bank_text.8}}</pre>
+<hr>
+<h3>Incomes: </h3>
+<hr>
+<pre>{{ bank_text.9}}</pre>
 
-        
 
     {% else %}
         The extracted text will be displayed here.
@@ -48,6 +87,7 @@
     
 <!-- image upload end -->
  </div> 
+
 </body>
 </html>
 

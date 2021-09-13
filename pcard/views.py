@@ -12,11 +12,12 @@ from .forms import UploadImageForm
 from .forms import ImageUploadForm
 from .forms import UploadFileForm
 # import our OCR function
+import pandas as pd
 from .ocr import ocr
 import re
 from .adhar import adhar
 from .voterid import voterid
-from .bank import bank_details_sbi, bank_details_alla
+from .bank import bank_details_sbi, bank_details_alla, bank_details_yes
 
 
 def first_view(request):
@@ -117,18 +118,20 @@ def bank_id(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         temp = request.POST['select_bank']
-        print(temp, "VVVV")
+        #print(temp, "VVVV")
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             fileURL = settings.MEDIA_URL + form.instance.file.name
-            print(fileURL)
+            #print(fileURL)
             if temp =="SBI":
                 bank_text = bank_details_sbi(settings.MEDIA_ROOT_URL + fileURL)
             elif temp =="Alla":
                 bank_text = bank_details_alla(settings.MEDIA_ROOT_URL + fileURL)
+            elif temp == "Yes":
+                bank_text = bank_details_yes(settings.MEDIA_ROOT_URL + fileURL)
             #print(extracted_text)
-            print(bank_text, "HHH")
+            #print(bank_text, "HHH")
             """
             
             b_no = bank_text[0]
@@ -144,7 +147,7 @@ def bank_id(request):
                 "Balance": b_t_bal
             }
             """
-            obj = [
+            """obj = [
                 bank_text[0],
                 bank_text[1],
                 bank_text[2],
@@ -153,9 +156,10 @@ def bank_id(request):
                 bank_text[5],
                 bank_text[6],
                 bank_text[7],
+                
             ]
-            list_text_as_a_string = json.dumps(obj, indent=2)
-            return render(request, 'pcard/bank.html', {'form':form, 'bank_text': list_text_as_a_string})
+            list_text_as_a_string = json.dumps(obj, indent=2)"""
+            return render(request, 'pcard/bank.html', {'form':form, 'bank_text': bank_text})
             #return render(request, 'pcard/bank.html', {'form':form, 'bank_text': bank_text})
 
     else:
