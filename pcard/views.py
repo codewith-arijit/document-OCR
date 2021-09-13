@@ -16,7 +16,7 @@ from .ocr import ocr
 import re
 from .adhar import adhar
 from .voterid import voterid
-from .bank import bank_details
+from .bank import bank_details_sbi, bank_details_alla
 
 
 def first_view(request):
@@ -116,13 +116,17 @@ def ocr_core(request):
 def bank_id(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
+        temp = request.POST['select_bank']
+        print(temp, "VVVV")
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
- 
             fileURL = settings.MEDIA_URL + form.instance.file.name
             print(fileURL)
-            bank_text = bank_details(settings.MEDIA_ROOT_URL + fileURL)
+            if temp =="SBI":
+                bank_text = bank_details_sbi(settings.MEDIA_ROOT_URL + fileURL)
+            elif temp =="Alla":
+                bank_text = bank_details_alla(settings.MEDIA_ROOT_URL + fileURL)
             #print(extracted_text)
             print(bank_text, "HHH")
             """

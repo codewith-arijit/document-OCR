@@ -21,4 +21,7 @@ class ImageUploadForm(forms.ModelForm):
 class UploadFileForm(forms.ModelForm):
   class Meta:
     model = FileUploadModel
-    fields = ('file', )
+    fields = ('file', 'select_bank')
+    
+
+    
