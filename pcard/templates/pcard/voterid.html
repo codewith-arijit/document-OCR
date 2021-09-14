@@ -5,6 +5,26 @@
  <head>
   <meta charset="UTF-8">
   <title>Engro</title>
+      <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
+<style>
+div#loading {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background: url('/media/loadingimage.gif') no-repeat;
+  display: none;
+  cursor: wait;
+  }
+</style>
  </head>
  <body>
  
@@ -22,7 +42,7 @@
      {{ form.as_p }}
 
 </td>
-<td><button type="submit" class="btn btn-primary">Upload</button> </td>
+<td><button type="submit" class="btn btn-primary" onclick="loading();">Upload</button> </td>
 </form>
 </tr>
 </table>

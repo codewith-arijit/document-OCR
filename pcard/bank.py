@@ -48,15 +48,15 @@ def bank_details_sbi(filename):
     data = "\n\n".join(pdf)
     # Read all the text into one string
     #print(data)
-    acc_name= "Account Name: " + '\n'.join([re.sub(r'Account Name\s+:', '', line) for line in data.splitlines() if 'Account Name' in line])
-    acc_no= "Account Number: "+ '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
-    acc_code = "IFS Code: "+ '\n'.join([re.sub(r'IFS Code\s+:', '', line) for line in data.splitlines() if 'IFS Code' in line])
+    acc_name= " " + '\n'.join([re.sub(r'Account Name\s+:', '', line) for line in data.splitlines() if 'Account Name' in line])
+    acc_no= " "+ '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
+    acc_code = " "+ '\n'.join([re.sub(r'IFS Code\s+:', '', line) for line in data.splitlines() if 'IFS Code' in line])
     
-    op_bal = "Opening Balance: " + str(bal[df["Balance"].first_valid_index()])
-    cl_bal = "Closing Balance: " + str(bal[df["Balance"].last_valid_index()])
-    t_debit = "Total Debit Summary: " + str(t_debit)
-    t_credit = "Total Credit Summary: " + str(t_credit)
-    t_bal = "Total Balance Summary: " + str(t_bal)
+    op_bal = " " + str(bal[df["Balance"].first_valid_index()])
+    cl_bal = " " + str(bal[df["Balance"].last_valid_index()])
+    t_debit = " " + str(t_debit)
+    t_credit = " " + str(t_credit)
+    t_bal = " " + str(t_bal)
     print(acc_name,"\n",acc_code,"\n",acc_no,"\n",op_bal,"\n",cl_bal)
     bank_text.append(acc_no)
     bank_text.append(acc_name)
@@ -127,15 +127,15 @@ def bank_details_alla(filename):
     data = "\n\n".join(pdf)
     # Read all the text into one string
     #print(data)
-    acc_name= "Account Name: ", '\n'.join([re.sub(r'^[\d \t]+|[\d \t]+$', '', line) for line in data.splitlines() if 'Mr. ' in line])
-    acc_no= "Account Number: ", '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
-    acc_code = "IFS Code: ", '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC Code' in line])
+    acc_name= " ", '\n'.join([re.sub(r'^[\d \t]+|[\d \t]+:$', '', line) for line in data.splitlines() if 'Mr. ' in line])
+    acc_no= " ", '\n'.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
+    acc_code = " ", '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC Code' in line])
     
-    op_bal = "Opening Balance: " + str(bal[df["Balance"].first_valid_index()])
-    cl_bal = "Closing Balance: " + str(bal[df["Balance"].last_valid_index()])
-    t_debit = "Total Debit Summary: " + str(t_debit)
-    t_credit = "Total Credit Summary: " + str(t_credit)
-    t_bal = "Total Balance Summary: " + str(t_bal)
+    op_bal = " " + str(bal[df["Balance"].first_valid_index()])
+    cl_bal = " " + str(bal[df["Balance"].last_valid_index()])
+    t_debit = " " + str(t_debit)
+    t_credit = " " + str(t_credit)
+    t_bal = " " + str(t_bal)
     
     bank_text.append(acc_no)
     bank_text.append(acc_name)
@@ -198,15 +198,15 @@ def bank_details_yes(filename):
     data = "\n\n".join(pdf)
     # Read all the text into one string
     #print(data)
-    acc_name= "Account Name: " + '\n'.join([re.sub(r'^[\d \t]+|[\d \t]+$', '', line) for line in data.splitlines() if 'MRS.' in line])
-    acc_no= "Account Number: "+ '\n'.join([re.sub(r'ACCOUNT No.\s+:', '', line) for line in data.splitlines() if 'ACCOUNT No.' in line])
-    acc_code = "IFS Code: "+ '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC' in line])
+    acc_name= " " + '\n'.join([re.sub(r'^[\d \t]+|[\d \t]+$', '', line) for line in data.splitlines() if 'MRS.' in line])
+    acc_no= " "+ '\n'.join([re.sub(r'ACCOUNT No.\s+:', '', line) for line in data.splitlines() if 'ACCOUNT No.' in line])
+    acc_code = " "+ '\n'.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC' in line])
     
-    op_bal = "Opening Balance: " + str(bal[0])
-    cl_bal = "Closing Balance: " + str(bal[(len(bal)-1)])
-    t_debit = "Total Debit Summary: " + str(t_debit)
-    t_credit = "Total Credit Summary: " + str(t_credit)
-    t_bal = "Total Balance Summary: " + str(t_bal)
+    op_bal = " " + str(bal[0])
+    cl_bal = " " + str(bal[(len(bal)-1)])
+    t_debit = " " + str(t_debit)
+    t_credit = " " + str(t_credit)
+    t_bal = " " + str(t_bal)
     #print(acc_name,"\n",acc_code,"\n",acc_no,"\n",op_bal,"\n",cl_bal)
     bank_text.append(acc_no)
     bank_text.append(acc_name)
@@ -229,7 +229,7 @@ def bank_details_yes(filename):
     #logo(filename)
     #print(f"Total Debit:%.2f \nTotal Credit:%.2f \nTotal Balance:%.2f" % (t_debit, t_credit, t_bal) )
     return bank_text
-
+ 
 #bank_details("text2.pdf")
 def logo(filename):
 

@@ -34,9 +34,9 @@ def aadhar(request):
             post.save()
  
             imageURL = settings.MEDIA_URL + form.instance.image.name
-            print(settings.MEDIA_URL, "cgfcgvhvhvh")
+            #print(settings.MEDIA_URL, "cgfcgvhvhvh")
             adhar_text = adhar(settings.MEDIA_ROOT_URL + imageURL)
-            print(adhar_text, "HHH")
+            #print(adhar_text, "HHH")
             #obj={
             #    'form':form, 'post':post, 'adhar_text': adhar_text, 'img_src' : imageURL 
             #}

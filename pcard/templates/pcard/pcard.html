@@ -5,6 +5,28 @@
  <head>
   <meta charset="UTF-8">
   <title>Engro</title>
+      <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
+<style>
+div#loading {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background: url('/media/loadingimage.gif') no-repeat;
+  display: none;
+  cursor: wait;
+  }
+
+
+</style>
  </head>
  <body>
  
@@ -23,7 +45,7 @@
      {{ form.as_p }}
 
 </td>
-<td><button type="submit" class="btn btn-primary">Upload</button> </td>
+<td><button type="submit" class="btn btn-primary" onclick="loading();">Upload</button> </td>
 </form>
 </tr>
 </table>
@@ -31,11 +53,15 @@
   <h1>Result:</h1>
   
     {% if img_src %}
+    
         <img src="{{ img_src }}" width="600" height="400">
+        
     {% endif %}
     <br>
+    <hr>
     {% if extracted_text %}
         <pre><p> The extracted text from the image above is: 
+        
         <img src="/media/Face1.jpg" ></img> <br>
         <h2><b> {{ extracted_text }} </b></h2></p></pre>
         
