@@ -1,20 +1,20 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render#, redirect
 from django.core.files.storage import FileSystemStorage
-import numpy as np
+"""import numpy as np
 import urllib
 import json
 import cv2
-import os
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+import os"""
+#from django.views.decorators.csrf import csrf_exempt
+#from django.http import JsonResponse
 from django.conf import settings
 from .forms import UploadImageForm
 from .forms import ImageUploadForm
 from .forms import UploadFileForm
 # import our OCR function
-import pandas as pd
+#import pandas as pd
 from .ocr import ocr
-import re
+#import re
 from .adhar import adhar
 from .voterid import voterid
 from .bank import bank_details_sbi, bank_details_alla, bank_details_yes
@@ -103,7 +103,7 @@ def ocr_core(request):
             post.save()
  
             imageURL = settings.MEDIA_URL + form.instance.image.name
-            print(imageURL)
+            #print(imageURL)
             extracted_text = ocr(settings.MEDIA_ROOT_URL + imageURL)
             #print(extracted_text)
             return render(request, 'pcard/pcard.html', {'form':form, 'post':post, 'extracted_text': extracted_text, 'img_src' : imageURL})

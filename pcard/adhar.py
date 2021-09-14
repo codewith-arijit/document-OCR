@@ -8,7 +8,7 @@ import cv2
 import ftfy
 from PIL import Image
 
-from scipy.ndimage import rotate
+#from scipy.ndimage import rotate
 import numpy as np
 face_classifier = cv2.CascadeClassifier("/home/arijitsen/Downloads/haarcascade_frontalface_default.xml")
 
@@ -42,16 +42,16 @@ def adhar(filename):
     # Arijit Code Added
     
     dict = text.split(' ')
-    print(dict)         
+    #print(dict)         
 
     #print('Pan card number is {}.\nDate of Birth is {}.'.format(val[0][0],val[1][0]))
-    print('\n')
+    #print('\n')
     # Cleaning all the gibberish text
     text = ftfy.fix_text(text)
     text = ftfy.fix_encoding(text)
     
     new_text = clear_text(text)
-    print(type(new_text))
+    #print(type(new_text))
     face_detect(filename)
     return new_text
 
@@ -145,23 +145,23 @@ def clear_text(text):
 
 def face_detect(filename):
 
-    print(filename, "XXX")
+    #print(filename, "XXX")
     img=cv2.imread(filename)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    cv2.imshow('Original image', img)
+    #cv2.imshow('Original image', img)
 
     faces = face_classifier.detectMultiScale(gray, 1.3, 5)
 
 
-    if faces is ():
-        print("No faces found")
+    """if faces is ():
+        print("No faces found")"""
 
     for (x, y, w, h) in faces:
         x = x - 25 
         y = y - 40 
         cv2.rectangle(img, (x, y), (x + w + 50, y + h + 70), (27, 200, 10), 2)
-        cv2.imshow('Face Detection', img)
+        #cv2.imshow('Face Detection', img)
         crop_img = img[y: y + h+70, x: x + w+50] 
         cv2.imwrite('/home/arijitsen/PAN-Card-OCR-master/media/Face1.jpg',crop_img)
         

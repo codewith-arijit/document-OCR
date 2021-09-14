@@ -1,7 +1,7 @@
 import tabula
 import pandas as pd
 
-from PyPDF2 import PdfFileReader
+#from PyPDF2 import PdfFileReader
 import re
 import pdftotext
 
