@@ -13,7 +13,7 @@ import re
 #import io
 #import os
 
-face_classifier = cv2.CascadeClassifier("/home/arijitsen/Downloads/haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier("/home/arijit/Downloads/haarcascade_frontalface_default.xml")
                                         
 #filename = cv2.imread("/home/arijitsen/PAN-Card-OCR-master/media")
 
@@ -136,8 +136,9 @@ def get_name(text):
     epic_no = voter_no.replace(" ", "")
     #print('\n')
     #print('Epic No:',epic_no)
-    ##
-    return data
+    ##print(str(d).replace("{","").replace("}", ""))
+    
+    return (str(data).replace("{","").replace("}", ""))
 
 
 
@@ -160,7 +161,7 @@ def face_detect(filename):
         cv2.rectangle(img, (x, y), (x + w + 50, y + h + 70), (27, 200, 10), 2)
         #cv2.imshow('Face Detection', img)
         crop_img = img[y: y + h+70, x: x + w+50] 
-        cv2.imwrite('/home/arijitsen/PAN-Card-OCR-master/media/Face2.jpg',crop_img)
+        cv2.imwrite('/home/arijit/Documents/PAN-Card-OCR-master/media/Face2.jpg',crop_img)
         
         cv2.waitKey(1000)
     cv2.destroyAllWindows() 
