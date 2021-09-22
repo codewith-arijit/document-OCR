@@ -8,6 +8,11 @@ from PIL import Image
 import numpy as np
 import regex
 
+def Convert(a):
+    it = iter(a)
+    res_dct = dict(zip(it, it))
+    return res_dct
+
 
 def driver_license(filename):  
     """
@@ -44,12 +49,12 @@ def driver_license(filename):
     data = {
         'firstName': None,
         'lastName': None,
-        'documentNumber': None
+        'documentNumber': None,
     }
     
     c = 0
     print(txt)
-    
+    pattern = "(?<=KEY\s*:\s*)\b[^\n]+"
     #Splitting lines
     lines = txt.split('\n')
     
@@ -104,5 +109,7 @@ def driver_license(filename):
                     """
             except:
                 pass
+    #new_data = Convert(data)
+    #print(new_data)
     return data
-    #print(data)
+    

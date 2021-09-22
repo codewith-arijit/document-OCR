@@ -16,3 +16,4 @@ tests/report/
 /input_data/
 /env/
 .vscode/
+db.sqlite3
