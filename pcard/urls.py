@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^aadhar/$', views.aadhar, name='aadhar'),
     url(r'^voterid/$', views.voter_id, name='voterid'),
     url(r'^bank_id/$', views.bank_id, name='bank_id'),
-    
+    url(r'^driver/$', views.driver_id, name='driver_id'),
 
 ]
 

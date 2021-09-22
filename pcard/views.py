@@ -18,7 +18,7 @@ from .ocr import ocr
 from .adhar import adhar
 from .voterid import voterid
 from .bank import bank_details_sbi, bank_details_alla, bank_details_yes
-
+from .driver import driver_license
 
 def first_view(request):
     return render(request, 'pcard/first_view.html', {})
@@ -166,3 +166,20 @@ def bank_id(request):
         form = UploadFileForm()
     return render(request, 'pcard/bank.html',{'form':form})
 
+
+def driver_id(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+ 
+            imageURL = settings.MEDIA_URL + form.instance.image.name
+            #print(imageURL)
+            driver_text = driver_license(settings.MEDIA_ROOT_URL + imageURL)
+            #print(driver_text)
+            return render(request, 'pcard/driver.html', {'form':form, 'post':post, 'driver_text': driver_text, 'img_src' : imageURL})
+
+    else:
+        form = ImageUploadForm()
+    return render(request, 'pcard/driver.html',{'form':form})
