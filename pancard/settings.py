@@ -25,7 +25,7 @@ SECRET_KEY = 'ksy#0qd4^7d#w-a*vo9(e_66k36^q^!4p_f#_y&7c6g4_za^jd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vast-brushlands-02708']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,8 +128,5 @@ MEDIA_ROOT_URL = '.'
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
 
 
