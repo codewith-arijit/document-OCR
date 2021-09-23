@@ -207,10 +207,10 @@ def ocr_to_json(text):
         ndata = json.load(f)
     
 
-    t = (f"Name: {data['Name']}\n"
-     f"Father's Name: {data['Father Name']}\n"
-     f"Date of Birth: {data['Date of Birth']}\n"
-     f"PAN number: {data['PAN']}\n")
+    t = {f"Name: {data['Name']}",
+     f"Father's Name: {data['Father Name']}",
+     f"Date of Birth: {data['Date of Birth']}",
+     f"PAN number: {data['PAN']}"}
 
     return t
     # data=t
