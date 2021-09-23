@@ -15,6 +15,7 @@ filelock==3.0.12
 fitz==0.0.1.dev2
 ftfy==6.0.3
 future==0.18.2
+gunicorn==20.1.0
 httplib2==0.19.1
 idna==3.2
 isodate==0.6.0
@@ -33,7 +34,7 @@ prov==2.0.0
 pydot==1.4.2
 PyMuPDF==1.18.17
 pyparsing==2.4.7
-pytesseract==0.3.8
+pytesseract
 python-dateutil==2.8.2
 pytz==2021.1
 pyxnat==1.4
