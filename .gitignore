@@ -17,3 +17,4 @@ tests/report/
 /env/
 .vscode/
 db.sqlite3
+/api/migrations/
