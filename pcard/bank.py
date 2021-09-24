@@ -238,10 +238,10 @@ def logo(filename):
             xref = img[0]
             pix = fitz.Pixmap(doc, xref)
             if pix.n < 5:       # this is GRAY or RGB
-                pix.writePNG("/home/arijit/Documents/PAN-Card-OCR-master/media/p%s-%s.png" % (i, xref))
+                pix.writePNG("./media/p%s-%s.png" % (i, xref))
             else:               # CMYK: convert to RGB first
                 pix1 = fitz.Pixmap(fitz.csRGB, pix)
-                pix1.writePNG("/home/arijit/Documents/PAN-Card-OCR-master/media/p%s-%s.png" % (i, xref))
+                pix1.writePNG("./media/p%s-%s.png" % (i, xref))
                 pix1 = None
             pix = None
 

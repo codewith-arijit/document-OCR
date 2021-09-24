@@ -163,7 +163,7 @@ def face_detect(filename):
         cv2.rectangle(img, (x, y), (x + w + 50, y + h + 70), (27, 200, 10), 2)
         #cv2.imshow('Face Detection', img)
         crop_img = img[y: y + h+70, x: x + w+50] 
-        cv2.imwrite('/home/arijit/Documents/PAN-Card-OCR-master/media/Face1.jpg',crop_img)
+        cv2.imwrite('./media/Face1.jpg',crop_img)
         
         cv2.waitKey(1000)
     cv2.destroyAllWindows() 
