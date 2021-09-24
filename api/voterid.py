@@ -137,8 +137,11 @@ def get_name(text):
     #print('\n')
     #print('Epic No:',epic_no)
     ##print(str(d).replace("{","").replace("}", ""))
-    
-    return (str(data).replace("{","").replace("}", ""))
+    result = {
+        "Name": data['Name'],
+        "Father's Name": data['Father Name']
+    }
+    return result #(str(data).replace("{","").replace("}", ""))
 
 
 

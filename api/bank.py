@@ -140,9 +140,9 @@ def bank_details_alla(filename):
     data = "\n\n".join(pdf)
     # Read all the text into one string
     #print(data)
-    acc_name= ' '.join([re.sub(r'^[\d \t]+|[\d \t]+:$', '', line) for line in data.splitlines() if 'Mr. ' in line])
-    acc_no= ' '.join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
-    acc_code = ' '.join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC Code' in line])
+    acc_name= " ".join([re.sub(r'^[\d \t]+|[\d \t]+:$', '', line) for line in data.splitlines() if 'Mr. ' in line])
+    acc_no= " ".join([re.sub(r'Account Number\s+:', '', line) for line in data.splitlines() if 'Account Number' in line])
+    acc_code = " ".join([re.sub(r'IFSC Code\s+:', '', line) for line in data.splitlines() if 'IFSC Code' in line])
     op_bal = " " + str(bal[df["Balance"].first_valid_index()])
     cl_bal = " " + str(bal[df["Balance"].last_valid_index()])
     t_debit = " " + str(t_debit)
