@@ -15,7 +15,7 @@ def bank_details_sbi(filename):
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",")
-
+    df = df.replace(r'\r',' ', regex=True)
     debit = df["Debit"]
     credit = df["Credit"]
     bal = df["Balance"]
@@ -88,7 +88,7 @@ def bank_details_alla(filename):
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",", error_bad_lines=False)
-
+    
     debit = df["DR"].dropna()
     credit = df["CR"].dropna()
     df["Balance"] = df["Balance"].str.strip(" CR")
@@ -163,10 +163,12 @@ def bank_details_alla(filename):
 def bank_details_yes(filename):
     #pdf_path3 = "text2.pdf"
     dfs = tabula.read_pdf(filename, pages = "all")
-    tabula.convert_into(filename, "output.csv", output_format="csv", pages='1', lattice=True)
+    
+    tabula.convert_into(filename, "output.csv", output_format="csv", pages='1')
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",",error_bad_lines=False)
+    
 
     debit = df["Debit"].dropna().reset_index(drop=True)
     credit = df["Credit"].dropna().reset_index(drop=True)
