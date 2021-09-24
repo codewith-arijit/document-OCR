@@ -56,8 +56,11 @@ div#loading {
     <br>
     {% if voterid_text %}
         <img src="/media/Face2.jpg" ></img> <br>
-        <p> The extracted text from the image above is: <h2><b> {{ voterid_text }} </b></h2></p>
-        
+        <p> The extracted text from the image above is: <br>
+            <h2><b> Name: {{ voterid_text.0 }} </b></h2></p><br>
+
+        <h2><b> Father's Name: {{ voterid_text.1 }} </b></h2></p><br>
+            
 
         
 

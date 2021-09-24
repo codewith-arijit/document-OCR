@@ -64,9 +64,11 @@ div#loading {
         <pre><p> The extracted text from the image above is: 
         
         
-        <h2><b> {{ driver_text }} </b></h2></p></pre>
+        <h2><b> First Name: {{ driver_text.0 }} </b></h2></p></pre><br>
         
+        <h2><b> Last Name: {{ driver_text.1 }} </b></h2></p></pre><br>
         
+        <h2><b> Driver's License No. : {{ driver_text.2 }} </b></h2></p></pre><br>
         
 
     {% else %}

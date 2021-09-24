@@ -137,8 +137,11 @@ def get_name(text):
     #print('\n')
     #print('Epic No:',epic_no)
     ##print(str(d).replace("{","").replace("}", ""))
-    
-    return (str(data).replace("{","").replace("}", ""))
+    print (data['Name'])
+    print (data['Father Name'])
+    print (voter_no)
+    list_data = [data['Name'], data['Father Name']]
+    return list_data #(str(data).replace("{","").replace("}", ""))
 
 
 

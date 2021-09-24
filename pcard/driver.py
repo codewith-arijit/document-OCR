@@ -111,5 +111,6 @@ def driver_license(filename):
                 pass
     #new_data = Convert(data)
     #print(new_data)
-    return data
+    list_data = [data['firstName'], data['lastName'], data['documentNumber']]
+    return list_data #data
     
