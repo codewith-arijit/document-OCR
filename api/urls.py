@@ -7,6 +7,10 @@ from .views import PanCardView #, PanCardViewDetails
 
 urlpatterns = [
     path('api/v1/pancard', views.PanCardView),
+    path('api/v1/adhar', views.AdharCardView),
+    path('api/v1/voter', views.VoterCardView),
+    path('api/v1/driver', views.DriverCardView),
+    path('api/v1/bank', views.BankView),
     #path('api/v1/upload/<int:pk>', views.PanCardViewDetails),
 ]
 

@@ -204,14 +204,21 @@ def ocr_to_json(text):
 
     # Reading data back JSON(give correct path where JSON is stored)
     with open('data.json', 'r', encoding= 'utf-8') as f:
-        ndata = json.load(f)
+        data = json.load(f)
     
-
+    """
     t = {f"Name: {data['Name']}",
      f"Father's Name: {data['Father Name']}",
      f"Date of Birth: {data['Date of Birth']}",
      f"PAN number: {data['PAN']}"}
+    """
 
+    t = {
+        "Name": data['Name'],
+        "Father's Name": data['Father Name'],
+        "Date Of Birth": data['Date of Birth'],
+        "PAN Number": data['PAN']
+    }
     return t
     # data=t
     # return Respone({"message":data})
