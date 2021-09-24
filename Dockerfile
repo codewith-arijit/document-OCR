@@ -25,7 +25,7 @@ RUN pip3 install --upgrade pip
 #RUN python3 -m virtualenv env
 #RUN source env/bin/activate
 COPY ./requirements.txt /usr/src/app
-RUN pip3 install -r requirements.txtn
+RUN pip3 install -r requirements.txt
 
 # copy project
 COPY . /usr/src/app
