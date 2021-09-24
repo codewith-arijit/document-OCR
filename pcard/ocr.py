@@ -16,7 +16,7 @@ import io
 from PIL import Image
 
 #from scipy.ndimage import rotate
-face_classifier = cv2.CascadeClassifier("/home/arijit/Downloads/haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier("./haarcascade_frontalface_default.xml")
                                         
 filename = cv2.imread("/home/arijit/Documents/PAN-Card-OCR-master/media")
 

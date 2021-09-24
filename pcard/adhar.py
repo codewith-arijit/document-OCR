@@ -10,7 +10,7 @@ from PIL import Image
 
 #from scipy.ndimage import rotate
 import numpy as np
-face_classifier = cv2.CascadeClassifier("/home/arijit/Downloads/haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier("./haarcascade_frontalface_default.xml")
 
 def adhar(filename):  
     """

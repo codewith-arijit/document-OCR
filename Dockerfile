@@ -13,15 +13,19 @@ RUN apt-get install -y tesseract-ocr
 RUN apt-get install -y build-essential libpoppler-cpp-dev pkg-config python-dev mupdf
 
 RUN apt-get install ffmpeg libsm6 libxext6  -y
-RUN apt-get update
 
+RUN apt-get install -y default-jre
+RUN apt-get install -y default-jdk
+
+
+RUN apt-get update
 RUN apt-get install -y python3-pip
 RUN pip3 install --upgrade pip
 #RUN pip3 install virtualenv
 #RUN python3 -m virtualenv env
 #RUN source env/bin/activate
 COPY ./requirements.txt /usr/src/app
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txtn
 
 # copy project
 COPY . /usr/src/app

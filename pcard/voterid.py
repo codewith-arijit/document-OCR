@@ -13,7 +13,7 @@ import re
 #import io
 #import os
 
-face_classifier = cv2.CascadeClassifier("/home/arijit/Downloads/haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier("./haarcascade_frontalface_default.xml")
                                         
 #filename = cv2.imread("/home/arijitsen/PAN-Card-OCR-master/media")
 
