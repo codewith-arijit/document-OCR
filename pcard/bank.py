@@ -11,7 +11,7 @@ import fitz
 def bank_details_sbi(filename):
     #pdf_path3 = "text2.pdf"
     dfs = tabula.read_pdf(filename, pages = "all")
-    tabula.convert_into(filename, "output.csv", output_format="csv", pages='all')
+    tabula.convert_into(filename, "output.csv", output_format="csv", pages='all', lattice=True)
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",")
@@ -84,7 +84,7 @@ def bank_details_sbi(filename):
 def bank_details_alla(filename):
     #pdf_path3 = "text2.pdf"
     dfs = tabula.read_pdf(filename, pages = "all")
-    tabula.convert_into(filename, "output.csv", output_format="csv", pages='all')
+    tabula.convert_into(filename, "output.csv", output_format="csv", pages='all',lattice=True)
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",", error_bad_lines=False)
@@ -163,7 +163,7 @@ def bank_details_alla(filename):
 def bank_details_yes(filename):
     #pdf_path3 = "text2.pdf"
     dfs = tabula.read_pdf(filename, pages = "all")
-    tabula.convert_into(filename, "output.csv", output_format="csv", pages='1')
+    tabula.convert_into(filename, "output.csv", output_format="csv", pages='1', lattice=True)
     #pdf_path=r"text2.pdf"
 
     df = pd.read_csv("output.csv", thousands=",",error_bad_lines=False)
