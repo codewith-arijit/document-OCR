@@ -6,7 +6,7 @@ from .views import PanCardView #, PanCardViewDetails
 #import PanCardView, PanCardViewDetails
 
 urlpatterns = [
-    path('api/v1/upload', views.PanCardView),
+    path('api/v1/pancard', views.PanCardView),
     #path('api/v1/upload/<int:pk>', views.PanCardViewDetails),
 ]
 
