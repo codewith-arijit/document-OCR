@@ -34,7 +34,7 @@ prov==2.0.0
 pydot==1.4.2
 PyMuPDF==1.16.14
 pyparsing==2.4.7
-pytesseract
+pytesseract==0.3.7
 python-dateutil==2.8.2
 pytz==2021.1
 pyxnat==1.4
