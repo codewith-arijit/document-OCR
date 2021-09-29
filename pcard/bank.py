@@ -104,7 +104,7 @@ def bank_details_alla(filename):
     t_bal = bal.sum()
 
     """coerce
-        Whole List of stuffs
+        Whole List of stuffs.
     """
     bank_text = []
 
