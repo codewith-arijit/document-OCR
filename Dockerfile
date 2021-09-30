@@ -8,15 +8,13 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBIAN_FRONTEND noninteractive
 # install dependencies
-RUN apt-get update && apt-get install -y tesseract-ocr libpoppler-cpp-dev mupdf default-jre default-jdk python3-pip pkg-config && rm -rf /var/lib/apt/lists/* && apt autoremove
+# copy project
+COPY . /usr/src/app
+RUN apt-get update && apt-get install -y tesseract-ocr libpoppler-cpp-dev mupdf default-jre default-jdk python3-pip pkg-config && rm -rf /var/lib/apt/lists/* && apt autoremove && pip3 install -r requirements.txt
 #RUN pip3 install virtualenv
 #RUN python3 -m virtualenv env
 #RUN source env/bin/activate
-COPY ./requirements.txt /usr/src/app
-RUN pip3 install -r requirements.txt
 
-# copy project
-COPY . /usr/src/app
 
 EXPOSE 8000
 
