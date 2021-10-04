@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+{% block content%}
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Engro</title>
+      <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+            $("#content").hide();       
+        }
+// ]]></script>
+<style>
+div#loading {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -150px;
+  background: url('/media/loadingimage.gif') no-repeat;
+  display: none;
+  cursor: wait;
+  }
+</style>
+ </head>
+ <body>
+ 
+<h1>Upload Voter ID Image</h1>
+<center>
+
+<!-- image upload start-->
+ <div class="container pt-7">
+<table width = "400">
+    <tr>
+    <td>
+
+<form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+     {{ form.as_p }}
+
+</td>
+<td><button type="submit" class="btn btn-primary" onclick="loading();">Upload</button> </td>
+</form>
+</tr>
+</table>
+
+  <h1>Result:</h1>
+  
+    {% if img_src %}
+        <img src="{{ img_src }}" width="600" height="400">
+    {% endif %}
+    
+    <br>
+    {% if voterid_text %}
+        <img src="/media/Face2.jpg" ></img> <br>
+        <p> The extracted text from the image above is: <br>
+            <h2><b> Name: {{ voterid_text.0 }} </b></h2></p><br>
+
+        <h2><b> Father's Name: {{ voterid_text.1 }} </b></h2></p><br>
+            
+
+        
+
+    {% else %}
+        The extracted text will be displayed here.
+    {% endif %}
+<!-- image upload end -->
+ </div> 
+ </center>
+</body>
+</html>
+
+{% endblock %}
