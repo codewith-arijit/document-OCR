@@ -54,7 +54,7 @@ def ocr(filename):
     kernel = np.ones((1, 1), np.uint8)
     i = cv2.dilate(i, kernel, iterations=1)
     i = cv2.erode(i, kernel, iterations=1)
-
+    
     text = pytesseract.image_to_string(i)
     #return text
     # Arijit Code Added
@@ -67,6 +67,7 @@ def ocr(filename):
     # Cleaning all the gibberish text
     text = ftfy.fix_text(text)
     text = ftfy.fix_encoding(text)
+    print(text,"XXXX")
     new_text = ocr_to_json(text)
 
     #print(type(new_text))
@@ -112,7 +113,7 @@ def ocr_to_json(text):
 
     for wordline in text1:
         xx = wordline.split('\n')
-        if ([w for w in xx if re.search('(INCOMETAXDEPARWENT @|mcommx|INCOME|TAX|GOW|GOVT|GOVERNMENT|OVERNMENT|VERNMENT|DEPARTMENT|EPARTMENT|PARTMENT|ARTMENT|INDIA|NDIA)$', w)]):
+        if ([w for w in xx if re.search('(INCOMETAXDEPARWENT @|mcommx|INCOME|TAX|GOW|GOVT|GOVERNMENT|OVERNMENT|VERNMENT|DEPARTMENT|EPARTMENT|PARTMENT|ARTMENT|INDIA|NDIA|INCOME|TAXDEPARIMENT 2)$', w)]):
             text1 = list(text1)
             lineno = text1.index(wordline)
             break
